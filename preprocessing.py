@@ -1,9 +1,10 @@
 import re
 import numpy as np
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import nltk
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 
-# TRY FIX → auto download NLTK stopwords if missing
+# Download NLTK resources if missing
 try:
     nltk.data.find("corpora/stopwords")
 except LookupError:
@@ -11,11 +12,17 @@ except LookupError:
 
 from nltk.corpus import stopwords
 
-# load stopwords
-stop_words_indo = set(stopwords.words('indonesian'))
+# English stopwords
 stop_words_eng = set(stopwords.words('english'))
+
+# Indonesian stopwords (Sastrawi)
+factory_sw = StopWordRemoverFactory()
+stop_words_indo = set(factory_sw.get_stop_words())
+
+# Merge stopwords
 stop_words = stop_words_indo.union(stop_words_eng)
 
+# Stemmer Indonesian
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
 
