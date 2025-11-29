@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 import onnxruntime as ort
-from tensorflow.keras.utils import pad_sequences
+from keras_preprocessing.sequence import pad_sequences
 from preprocessing import preprocess_text
 from numeric_processing import extract_numeric_features
 
@@ -30,7 +30,7 @@ def predict_email(text, from_domain="example.com"):
         text, from_domain, scaler, le_labels
     ).astype(np.float32)
 
-    # Run ONNX session
+    # ONNX runtime inference
     inputs = {
         "text_input": padded,
         "num_input": numeric_scaled
