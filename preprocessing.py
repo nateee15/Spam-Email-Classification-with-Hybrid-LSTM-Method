@@ -2,16 +2,14 @@ import re
 import numpy as np
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import nltk
-from nltk.corpus import stopwords
 
-
-import nltk
-
-# Ensure stopwords are downloaded when running on Streamlit Cloud
+# TRY FIX → auto download NLTK stopwords if missing
 try:
     nltk.data.find("corpora/stopwords")
 except LookupError:
     nltk.download("stopwords")
+
+from nltk.corpus import stopwords
 
 # load stopwords
 stop_words_indo = set(stopwords.words('indonesian'))
