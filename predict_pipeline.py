@@ -1,7 +1,6 @@
 import pickle
 import numpy as np
-#from tensorflow.keras.preprocessing.sequence import pad_sequences
-from keras_preprocessing.sequence import pad_sequences
+from tensorflow.keras.utils import pad_sequences
 from tensorflow.keras.models import load_model
 from preprocessing import preprocess_text
 from numeric_processing import extract_numeric_features
